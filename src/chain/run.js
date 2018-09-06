@@ -3,18 +3,19 @@
 import { Ok, Error } from 'folktale/result'
 
 const isFunction = (fn) => typeof fn === 'function'
+const isResultType = (result) => Ok.hasInstance(result)
+  || Error.hasInstance(result)
 
 const _validate = (validator, result) => {
 
   if (isFunction(validator)) {
-    return Ok.hasInstance(result) || Error.hasInstance(result)
+
+    return isResultType(result)
       ? validator(result.merge())
       : validator(result)
   }
 
-  return Ok.hasInstance(result) || Error.hasInstance(result)
-    ? result
-    : Ok(result)
+  return isResultType(result) ? result : Ok(result)
 }
 
 const _execute = async(fn, validator, result) => {
