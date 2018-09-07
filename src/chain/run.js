@@ -1,10 +1,9 @@
 'use strict'
 
-import { Ok, Error } from 'folktale/result'
+import Type, { Ok, Error } from '../type'
 
 const isFunction = (fn) => typeof fn === 'function'
-const isResultType = (result) => Ok.hasInstance(result)
-  || Error.hasInstance(result)
+const isResultType = (result) => Type.isOk(result) || Type.isError(result)
 
 const _validate = (validator, result) => {
 
@@ -32,7 +31,7 @@ export default (fns) => async() => {
   let result
   for (let [ fn, validator ] of fns) {
     result = _execute(fn, validator, result)
-    if (Error.hasInstance(result)) break
+    if (Type.isError(result)) break
   }
   return result
 }

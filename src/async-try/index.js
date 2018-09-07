@@ -1,6 +1,6 @@
 'use strict'
 
-import { Ok, Error } from 'folktale/result'
+import { Ok, Error } from '../type'
 
 export default async function asyncTry(fn) {
 
