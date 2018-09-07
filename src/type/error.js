@@ -1,6 +1,6 @@
 'use strict'
 
-export default function Ok(value) {
+export default function Error(value) {
 
   return {
 
