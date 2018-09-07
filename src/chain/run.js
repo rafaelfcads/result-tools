@@ -10,7 +10,7 @@ const _validate = (validator, result) => {
   if (isFunction(validator)) {
 
     return isResultType(result)
-      ? validator(result.merge())
+      ? validator(result.get())
       : validator(result)
   }
 
