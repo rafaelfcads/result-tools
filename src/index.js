@@ -6,3 +6,4 @@ import asyncTry from './async-try'
 import chain from './chain'
 
 export default { Ok, Error, asyncTry, chain }
+export { Ok, Error, asyncTry, chain }
