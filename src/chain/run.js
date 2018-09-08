@@ -1,26 +1,12 @@
 'use strict'
 
-import Type, { Ok, Error } from '../type'
-
-const isFunction = (fn) => typeof fn === 'function'
-const isResultType = (result) => Type.isOk(result) || Type.isError(result)
-
-const _validate = (validator, result) => {
-
-  if (isFunction(validator)) {
-
-    return isResultType(result)
-      ? validator(result.get())
-      : validator(result)
-  }
-
-  return isResultType(result) ? result : Ok(result)
-}
+import Type, { Error } from '../type'
+import validate from './validate'
 
 const _execute = async(fn, validator, result) => {
 
   try {
-    return _validate(validator, await fn(result))
+    return validate(validator, await fn(result))
   } catch (err) {
     return Error(err)
   }
