@@ -4,21 +4,11 @@ import { Error } from 'folktale/result'
 
 export default (fns) => async() => {
 
-  let result
+  let results = []
   for (let [ fn, validator, opts ] of fns) {
-
-    console.log('RUN fn')
-    console.log(fn)
-    console.log('RUN  validator')
-    console.log(validator)
-    console.log('RUN  opts')
-    console.log(opts)
-
-    result = validator(await fn(...opts))
-
-    console.log('RUN  result')
-    console.log(result)
-    if (Error.hasInstance(result)) break
+    let result = await fn(...opts)
+    results.push(result)
+    if (Error.hasInstance(validator(result))) break
   }
-  return result
+  return results
 }
