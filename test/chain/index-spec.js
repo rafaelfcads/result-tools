@@ -1,7 +1,7 @@
 'use strict'
 
 import { get } from 'lodash/fp'
-import { Ok, Error } from 'folktale/result'
+import { Ok, Error } from '../../src/type'
 import asyncTry from '../../src/async-try'
 import Chain from '../../src/chain'
 
@@ -16,8 +16,8 @@ describe('Chain', function() {
         add(fn).
         run()
 
-      expect(Error.hasInstance(result)).to.be.true
-      expect(result.merge()).to.be.eq(-1)
+      expect(result.isError()).to.be.true
+      expect(result.get()).to.be.eq(-1)
     })
 
     it('when fn returns Result.Error', async function() {
@@ -27,8 +27,8 @@ describe('Chain', function() {
         add(fn).
         run()
 
-      expect(Error.hasInstance(result)).to.be.true
-      expect(result.merge()).to.be.eq(-1)
+      expect(result.isError()).to.be.true
+      expect(result.get()).to.be.eq(-1)
     })
 
     it('when validator returns Result.Error', async function() {
@@ -42,8 +42,8 @@ describe('Chain', function() {
         add(fn, isEmpty).
         run()
 
-      expect(Error.hasInstance(result)).to.be.true
-      expect(result.merge()).to.be.eq('Empty result')
+      expect(result.isError()).to.be.true
+      expect(result.get()).to.be.eq('Empty result')
     })
   })
 
@@ -56,8 +56,8 @@ describe('Chain', function() {
         add(fn).
         run()
 
-      expect(Ok.hasInstance(result)).to.be.true
-      expect(result.getOrElse()).to.be.eq(1)
+      expect(result.isOk()).to.be.true
+      expect(result.orElse()).to.be.eq(1)
     })
 
     it('when fn returns Result.Ok', async function() {
@@ -67,8 +67,8 @@ describe('Chain', function() {
         add(fn).
         run()
 
-      expect(Ok.hasInstance(result)).to.be.true
-      expect(result.getOrElse()).to.be.eq(1)
+      expect(result.isOk()).to.be.true
+      expect(result.orElse()).to.be.eq(1)
     })
 
     it('when validator returns Result.Ok', async function() {
@@ -82,8 +82,8 @@ describe('Chain', function() {
         add(fn, isEmpty).
         run()
 
-      expect(Ok.hasInstance(result)).to.be.true
-      expect(result.getOrElse()).to.be.eq(10)
+      expect(result.isOk()).to.be.true
+      expect(result.orElse()).to.be.eq(10)
     })
   })
 })
