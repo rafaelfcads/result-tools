@@ -1,7 +1,7 @@
 'use strict'
 
 import _ from 'lodash'
-import { Ok, Error } from 'folktale/result'
+import { Ok, Error } from '../../src/type'
 import Result from '../../src'
 
 describe('serial', function() {
@@ -15,8 +15,8 @@ describe('serial', function() {
     .add(fn)()
     .run()
 
-    expect(Ok.hasInstance(results[0])).to.be.true
-    expect(results[0].getOrElse()).to.be.eq(18)
+    expect(results[0].isOk()).to.be.true
+    expect(results[0].get()).to.be.eq(18)
 
   })
 
@@ -29,8 +29,8 @@ describe('serial', function() {
     .add(fnPromiseArgs)()
     .run()
 
-    expect(Ok.hasInstance(results[0])).to.be.true
-    expect(results[0].getOrElse()).to.be.eq(18)
+    expect(results[0].isOk()).to.be.true
+    expect(results[0].get()).to.be.eq(18)
 
   })
   it('should return Ok to serial add with one fn, one arg and one validation', async function() {
@@ -43,8 +43,8 @@ describe('serial', function() {
     .add(fnPromiseArgs, 10)(isEmpty)
     .run()
 
-    expect(Ok.hasInstance(results[0])).to.be.true
-    expect(results[0].getOrElse()).to.be.eq(10)
+    expect(results[0].isOk()).to.be.true
+    expect(results[0].get()).to.be.eq(10)
 
   })
 
@@ -59,10 +59,10 @@ describe('serial', function() {
     .add(fnPromiseArgs, 20)(isEmpty)
     .run()
 
-    expect(Ok.hasInstance(results[0])).to.be.true
-    expect(results[0].getOrElse()).to.be.eq(10)
-    expect(Ok.hasInstance(results[1])).to.be.true
-    expect(results[1].getOrElse()).to.be.eq(20)
+    expect(results[0].isOk()).to.be.true
+    expect(results[0].get()).to.be.eq(10)
+    expect(results[1].isOk()).to.be.true
+    expect(results[1].get()).to.be.eq(20)
 
   })
 
@@ -76,9 +76,9 @@ describe('serial', function() {
     .add(fnPromiseArgs, 10, 20)(isEmpty)
     .run()
 
-    expect(Ok.hasInstance(results[0])).to.be.true
-    expect(_.get(results[0].getOrElse(), 'fnArgFirst')).to.be.eq(10)
-    expect(_.get(results[0].getOrElse(), 'fnArgSecond')).to.be.eq(20)
+    expect(results[0].isOk()).to.be.true
+    expect(_.get(results[0].get(), 'fnArgFirst')).to.be.eq(10)
+    expect(_.get(results[0].get(), 'fnArgSecond')).to.be.eq(20)
 
   })
 
@@ -94,10 +94,10 @@ describe('serial', function() {
     .add(fnPromise)(isEmpty)
     .run()
 
-    expect(Ok.hasInstance(results[0])).to.be.true
-    expect(results[0].getOrElse()).to.be.eq(33)
-    expect(Ok.hasInstance(results[1])).to.be.true
-    expect(results[1].getOrElse()).to.be.eq('Without Args')
+    expect(results[0].isOk()).to.be.true
+    expect(results[0].get()).to.be.eq(33)
+    expect(results[1].isOk()).to.be.true
+    expect(results[1].get()).to.be.eq('Without Args')
 
   })
 
@@ -110,8 +110,8 @@ describe('serial', function() {
     .add(fnPromiseArgs, 10)()
     .run()
 
-    expect(Ok.hasInstance(results[0])).to.be.true
-    expect(results[0].getOrElse()).to.be.eq(10)
+    expect(results[0].isOk()).to.be.true
+    expect(results[0].get()).to.be.eq(10)
 
   })
 
@@ -127,10 +127,10 @@ describe('serial', function() {
     .add(fnPromise)(isEmpty)
     .run()
 
-    expect(Ok.hasInstance(results[0])).to.be.true
-    expect(results[0].getOrElse()).to.be.eq(33)
-    expect(Ok.hasInstance(results[1])).to.be.true
-    expect(results[1].getOrElse()).to.be.eq('Without Args')
+    expect(results[0].isOk()).to.be.true
+    expect(results[0].get()).to.be.eq(33)
+    expect(results[1].isOk()).to.be.true
+    expect(results[1].get()).to.be.eq('Without Args')
 
   })
 
@@ -146,7 +146,7 @@ describe('serial', function() {
     .add(fnPromiseArgs)(isEmpty)
     .run()
 
-    expect(Error.hasInstance(results[0])).to.be.true
+    expect(results[0].isError()).to.be.true
 
   })
 

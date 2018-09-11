@@ -1,6 +1,6 @@
 'use strict'
 
-import { Error } from 'folktale/result'
+import Type from '../type'
 
 export default (fns) => async() => {
 
@@ -8,7 +8,7 @@ export default (fns) => async() => {
   for (let [ fn, validator, opts ] of fns) {
     let result = await fn(...opts)
     results.push(result)
-    if (Error.hasInstance(validator(result))) break
+    if (Type.isError(validator(result))) break
   }
   return results
 }
