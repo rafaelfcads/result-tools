@@ -1,7 +1,7 @@
 'use strict'
 
 import asyncTry from '../async-try'
-import Type, { Error } from '../type'
+import Type from '../type'
 import validate from './validate'
 
 export default (fns) => async() => {
