@@ -1,14 +1,26 @@
 'use strict'
 
-import Type from '../type'
+import asyncTry from '../async-try'
+import Type, { Ok } from '../type'
+
+const isFn = (type) => type === 'fn'
+const isMap = (type) => type === 'map'
 
 export default (fns) => async() => {
-
+  let result
   let results = []
-  for (let [ fn, validator, opts ] of fns) {
-    let result = await fn(...opts)
-    results.push(result)
-    if (Type.isError(validator(result))) break
+
+  for (let [ type, fn, opts ] of fns) {
+
+    if (!!result && Type.isError(result)) break
+    if (isFn(type)) result = await asyncTry(() => fn(...opts))
+    if (isMap(type)) result = await asyncTry(() => fn(...results))
+
+    results.push(result.get())
   }
-  return results
+
+  return Type.isError(result)
+      ? result
+      : Ok(results)
 }
+
