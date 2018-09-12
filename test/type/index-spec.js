@@ -25,6 +25,10 @@ describe('Type', function() {
       expect(isOk(ok)).to.be.true
     })
 
+    it('should return false when value is undefined', function() {
+      expect(isOk()).to.be.false
+    })
+
     it('should return false', function() {
       const ok = 'test'
       expect(isOk(ok)).to.be.false
@@ -36,6 +40,10 @@ describe('Type', function() {
     it('should return true', function() {
       const error = Error('test')
       expect(isError(error)).to.be.true
+    })
+
+    it('should return false when value is undefined', function() {
+      expect(isError()).to.be.false
     })
 
     it('should return false', function() {
