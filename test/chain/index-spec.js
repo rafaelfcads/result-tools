@@ -47,15 +47,19 @@ describe('Chain', function() {
 
     it('when validator returns Result.Error', async function() {
 
+      const stub = sinon.stub()
       const fn = () => Promise.resolve({ rows: [] })
-      const isEmpty = (res) => get('rows.0', res)
+      const map = (res) => get('rows.0', res)
         ? Ok(get('rows.0', res))
         : Error('Empty result')
 
       const result = await new Chain().
-        add(fn, isEmpty).
+        add(fn).
+        map(map).
+        add(stub).
         run()
 
+      expect(stub).to.have.not.been.called
       expect(result.isError()).to.be.true
       expect(result.get()).to.be.eq('Empty result')
     })
@@ -101,12 +105,13 @@ describe('Chain', function() {
     it('when validator returns Result.Ok', async function() {
 
       const fn = () => Promise.resolve({ rows: [ 10 ] })
-      const isEmpty = (res) => get('rows.0', res.get())
+      const map = (res) => get('rows.0', res.get())
         ? Ok(get('rows.0', res.get()))
         : Error('Empty result')
 
       const result = await new Chain().
-        add(fn, isEmpty).
+        add(fn).
+        map(map).
         run()
 
       expect(result.isOk()).to.be.true
@@ -117,12 +122,13 @@ describe('Chain', function() {
 
       const fn1 = () => Promise.resolve({ rows: [ 10 ] })
       const fn2 = (res) => Promise.resolve(res.get() * 2)
-      const isEmpty = (res) => get('rows.0', res.get())
+      const map = (res) => get('rows.0', res.get())
         ? Ok(get('rows.0', res.get()))
         : Error('Empty result')
 
       const result = await new Chain().
-        add(fn1, isEmpty).
+        add(fn1).
+        map(map).
         add(fn2).
         run()
 

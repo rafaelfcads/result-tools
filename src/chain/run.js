@@ -2,15 +2,13 @@
 
 import asyncTry from '../async-try'
 import Type from '../type'
-import validate from './validate'
 
 export default (fns) => async() => {
 
   let result
-  for (let [ fn, validator ] of fns) {
+  for (let fn of fns) {
+    if (!!result && Type.isError(result)) break
     result = await asyncTry(() => fn(result))
-    result = validate(validator, result)
-    if (Type.isError(result)) break
   }
   return result
 }

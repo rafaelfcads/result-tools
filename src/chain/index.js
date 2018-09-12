@@ -6,7 +6,8 @@ import run from './run'
 export default (fns = []) => {
 
   const methods = {
-    add: (fn, validator) => add(methods)(fns)(fn, validator),
+    add: (fn) => add(methods)(fns)(fn),
+    map: (fn) => add(methods)(fns)(fn),
     run: run(fns)
   }
   return methods

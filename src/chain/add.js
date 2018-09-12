@@ -1,6 +1,6 @@
 'use strict'
 
-export default (methods) => (fns) => (fn, validator) => {
-  fns.push([ fn, validator ])
+export default (methods) => (fns) => (fn) => {
+  fns.push(fn)
   return methods
 }
