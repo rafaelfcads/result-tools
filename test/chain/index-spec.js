@@ -45,7 +45,7 @@ describe('Chain', function() {
       expect(result.orElse('Error')).to.be.eq('Error')
     })
 
-    it('when validator returns Result.Error', async function() {
+    it('when map returns Result.Error', async function() {
 
       const stub = sinon.stub()
       const fn = () => Promise.resolve({ rows: [] })
@@ -102,7 +102,7 @@ describe('Chain', function() {
       expect(result.get()).to.be.eq(1)
     })
 
-    it('when validator returns Result.Ok', async function() {
+    it('when map returns Result.Ok', async function() {
 
       const fn = () => Promise.resolve({ rows: [ 10 ] })
       const map = (res) => get('rows.0', res.get())
@@ -118,7 +118,7 @@ describe('Chain', function() {
       expect(result.get()).to.be.eq(10)
     })
 
-    it('when has validator and another function to execute', async function() {
+    it('when call map and has another function to execute', async function() {
 
       const fn1 = () => Promise.resolve({ rows: [ 10 ] })
       const fn2 = (res) => Promise.resolve(res.get() * 2)
