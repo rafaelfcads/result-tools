@@ -14,7 +14,10 @@ export default (fns) => async() => {
 
     if (!!result && Type.isError(result)) break
     if (isFn(type)) result = await asyncTry(() => fn(...opts))
-    if (isMap(type)) result = await asyncTry(() => fn(...results))
+    if (isMap(type)) {
+      result = await asyncTry(() => fn(...results))
+      results = []
+    }
 
     results.push(result.get())
   }
