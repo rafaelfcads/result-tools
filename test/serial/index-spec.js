@@ -2,21 +2,29 @@
 
 import { first } from 'lodash'
 import asyncTry from '../../src/async-try'
-import Serial from '../../src/serial'
+import Result from '../../src'
 
 describe('Serial', function() {
 
   context('should return Error', function() {
 
-    it('when fn returns Promise.reject', async function() {
+    it.only('when fn returns Promise.reject', async function() {
 
-      const fn = () => Promise.reject(-1)
-      const result = await new Serial()
-        .add(fn)
+      const fn = () => Promise.reject(1)
+      const fn2 = () => Promise.resolve(2)
+      const teste = await asyncTry(() => fn2())
+
+      const siri = await teste
+        .serial(fn)
+        .serial(fn)
         .run()
+ 
 
-      expect(result.isError()).to.be.true
-      expect(result.get()).to.be.eq(-1)
+
+      // console.log(siri.get())
+
+      // expect(result.isError()).to.be.true
+      // expect(result.get()).to.be.eq(-1)
 
     })
 
