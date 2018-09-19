@@ -5,8 +5,7 @@ import chain from './chain'
 import serial from './serial'
 import map from './map'
 import run from './run'
-
-const fluentMethods = (fns = []) => {
+const flowMethods = (fns = []) => {
 
   const methods = {
     serial: (fn, ...opts) => add(methods)(fns)(serial, fn, opts),
@@ -17,5 +16,5 @@ const fluentMethods = (fns = []) => {
   return methods
 }
 
-export default fluentMethods()
+export default flowMethods()
 

@@ -1,7 +1,7 @@
 'use strict'
 
 import { first } from 'lodash'
-import asyncTry from '../../src/async-try'
+import asyncTry from '../../src/try'
 import Result from '../../src'
 
 describe('Serial', function() {
@@ -11,13 +11,21 @@ describe('Serial', function() {
     it.only('when fn returns Promise.reject', async function() {
 
       const fn = () => Promise.reject(1)
-      const fn2 = () => Promise.resolve(2)
-      const teste = await asyncTry(() => fn2())
+      const fn1 = () => Promise.resolve(2)
+      const fn3 = (a, b) => Promise.resolve(a+b)
+      const fn4 = (a, b) => Promise.resolve(a+b)
 
-      const siri = await teste
+      const teste2 = await Result
         .serial(fn)
-        .serial(fn)
+        .serial(fn1)
+        .map(fn3)
         .run()
+      console.log(teste2.get())
+
+      // const siri = await teste
+      //   .serial(fn)
+      //   .serial(fn)
+      //   .run()
  
 
 

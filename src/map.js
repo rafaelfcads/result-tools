@@ -1,5 +1,5 @@
 'use strict'
 
-import asyncTry from '../async-try'
+import asyncTry from './try'
 
 export default (fn) => (results) => asyncTry(() => fn(...results))

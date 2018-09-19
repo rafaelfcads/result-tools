@@ -1,6 +1,6 @@
 'use strict'
 
-import add from '../../src/methods/add'
+import add from '../../src/add'
 
 describe('Serial', function() {
 

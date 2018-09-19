@@ -12,9 +12,9 @@ export default function Ok(value) {
     isError: () => false,
     orElse: () => value,
     get: () => value,
-    serial: serial(value),
-    chain: chain(value),
-    map: map(value)
+    serial,
+    chain,
+    map
     
   }
 }

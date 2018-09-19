@@ -1,6 +1,7 @@
 'use strict'
 
-import Type, { Ok } from '../type'
+import serial from './serial'
+import Type, { Ok } from './type'
 
 const response = (result) => (results) => Type.isError(result)
   ? result
@@ -14,7 +15,8 @@ export default (fns) => async() => {
   for (let [ fluentMethod, fn, opts ] of fns) {
     result = await fluentMethod(fn, opts)(results)
     if (Type.isError(result)) break
-    results.push(result)
+    if (fluentMethod !== serial) results = []
+    results.push(result.get())
   }
 
   return response(result)(results)
