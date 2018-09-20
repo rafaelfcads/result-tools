@@ -2,7 +2,8 @@
 
 import flow from '../flow'
 
-const { serial, chain, map } = flow
+const serial = (fn, ...opts) => flow().serial(fn, ...opts)
+const chain = (fn) => flow().chain(fn)
 
 export default function Ok(value) {
 
@@ -12,9 +13,8 @@ export default function Ok(value) {
     isError: () => false,
     orElse: () => value,
     get: () => value,
-    serial,
-    chain,
-    map
+    serial: (fn, ...opts) => serial(() => value).serial(fn, ...opts),
+    chain: (fn) => chain(() => value).serial(fn),
     
   }
 }

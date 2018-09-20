@@ -6,5 +6,8 @@ import Error from './type/error'
 import asyncTry from './try'
 import flow from './flow'
 
-export default { Type, Ok, Error, asyncTry, flow}
-export { Type, Ok, Error, asyncTry, flow }
+const serial = (fn, ...opts) => flow().serial(fn, ...opts)
+const chain = (fn) => flow().chain(fn)
+
+export default { Type, Ok, Error, asyncTry, serial, chain }
+export { Type, Ok, Error, asyncTry, serial as Serial, chain as Chain }

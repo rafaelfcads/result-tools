@@ -20,7 +20,8 @@ describe('Serial', function() {
         .serial(fn1)
         .map(fn3)
         .run()
-      console.log(teste2.get())
+      const teste3 = await teste2.serial(fn1).serial(fn1).run()
+      console.log(teste3.get())
 
       // const siri = await teste
       //   .serial(fn)
