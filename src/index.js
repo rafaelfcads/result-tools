@@ -6,7 +6,5 @@ import Error from './type/error'
 import asyncTry from './try'
 import flow from './flow'
 
-const { serial, chain } = flow
-
-export default { Type, Ok, Error, asyncTry, serial, chain }
-export { Type, Ok, Error, asyncTry, serial as Serial, chain }
+export default { Type, Ok, Error, asyncTry, flow}
+export { Type, Ok, Error, asyncTry, flow }

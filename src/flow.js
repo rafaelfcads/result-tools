@@ -5,7 +5,8 @@ import chain from './chain'
 import serial from './serial'
 import map from './map'
 import run from './run'
-const flowMethods = (fns = []) => {
+
+export default (fns = []) => {
 
   const methods = {
     serial: (fn, ...opts) => add(methods)(fns)(serial, fn, opts),
@@ -15,6 +16,4 @@ const flowMethods = (fns = []) => {
   }
   return methods
 }
-
-export default flowMethods()
 

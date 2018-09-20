@@ -10,13 +10,13 @@ describe('Serial', function() {
 
     it.only('when fn returns Promise.reject', async function() {
 
-      const fn = () => Promise.reject(1)
+      const fn = (raf) => Promise.resolve(raf)
       const fn1 = () => Promise.resolve(2)
       const fn3 = (a, b) => Promise.resolve(a+b)
       const fn4 = (a, b) => Promise.resolve(a+b)
 
       const teste2 = await Result
-        .serial(fn)
+        .serial(fn, 5)
         .serial(fn1)
         .map(fn3)
         .run()
