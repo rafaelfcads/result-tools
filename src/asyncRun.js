@@ -7,13 +7,13 @@ const response = (result) => (results) => Type.isError(result)
   ? result
   : Ok(results)
 
-export default (fns) =>() => {
+export default (fns) => async() => {
 
   let results = []
   let result
 
   for (let [ fluentMethod, fn, opts ] of fns) {
-    result = fluentMethod(fn, opts)(results)
+    result = await fluentMethod(fn, opts)(results)
     if (Type.isError(result)) break
     if (fluentMethod !== serial) results = []
     results.push(result.get())

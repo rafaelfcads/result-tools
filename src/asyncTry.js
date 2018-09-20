@@ -2,11 +2,11 @@
 
 import Type, { Ok, Error } from './type'
 
-export default function asyncTry(fn) {
+export default async function asyncTry(fn) {
 
   try {
 
-    const result = fn()
+    const result = await fn()
     return Type.isOk(result) || Type.isError(result)
       ? result
       : Ok(result)

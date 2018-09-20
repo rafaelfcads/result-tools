@@ -14,7 +14,7 @@ export default function Ok(value) {
     orElse: () => value,
     get: () => value,
     serial: (fn, ...opts) => serial(() => value).serial(fn, ...opts),
-    chain: (fn) => chain(() => value).serial(fn),
+    chain: (fn) => chain(() => value).serial(fn)
     
   }
 }
