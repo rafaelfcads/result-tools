@@ -3,9 +3,11 @@
 import Type from './type'
 import Ok from './type/ok'
 import Error from './type/error'
-import asyncTry from './async-try'
-import chain from './chain'
-import serial from './serial'
+import asyncTry from './try'
+import flow from './flow'
 
-export default { Type, Ok, Error, asyncTry, chain, serial }
-export { Type, Ok, Error, asyncTry, chain, serial }
+const serial = (fn, ...opts) => flow().serial(fn, ...opts)
+const chain = (fn) => flow().chain(fn)
+
+export default { Type, Ok, Error, asyncTry, serial, chain }
+export { Type, Ok, Error, asyncTry, serial as Serial, chain as Chain }

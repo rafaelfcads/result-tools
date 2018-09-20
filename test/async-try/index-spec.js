@@ -1,7 +1,7 @@
 'use strict'
 
 import { Ok, Error } from '../../src/type'
-import asyncTry from '../../src/async-try'
+import asyncTry from '../../src/try'
 
 describe('asyncTry', function() {
 

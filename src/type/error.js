@@ -2,11 +2,16 @@
 
 export default function Error(value) {
 
-  return {
+  const methods = {
 
     isOk: () => false,
     isError: () => true,
     orElse: (val) => val,
-    get: () => value
+    get: () => value,
+    serial: () => methods,
+    chain: () => methods,
+    map: () => methods
+    
   }
+  return methods
 }

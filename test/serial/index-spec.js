@@ -1,153 +1,180 @@
 'use strict'
 
-import _ from 'lodash'
-import { Ok, Error } from '../../src/type'
+import { first } from 'lodash'
+import asyncTry from '../../src/try'
 import Result from '../../src'
 
-describe('serial', function() {
+describe('Serial', function() {
 
-  it('should return Ok to serial add with one fn', async function() {
+  context('should return Error', function() {
 
-    const fn = () => Ok(18)
+    it.only('when fn returns Promise.reject', async function() {
 
-    const results = await Result
-    .serial()
-    .add(fn)()
-    .run()
+      const fn = (raf) => Promise.resolve(raf)
+      const fn1 = () => Promise.resolve(2)
+      const fn3 = (a, b) => Promise.resolve(a+b)
+      const fn4 = (a, b) => Promise.resolve(a+b)
 
-    expect(results[0].isOk()).to.be.true
-    expect(results[0].get()).to.be.eq(18)
+      const teste2 = await Result
+        .serial(fn, 5)
+        .serial(fn1)
+        .map(fn3)
+        .run()
+      const teste3 = await teste2.serial(fn1).serial(fn1).run()
+      console.log(teste3.get())
 
+      // const siri = await teste
+      //   .serial(fn)
+      //   .serial(fn)
+      //   .run()
+ 
+
+
+      // console.log(siri.get())
+
+      // expect(result.isError()).to.be.true
+      // expect(result.get()).to.be.eq(-1)
+
+    })
+
+    it('when fn returns Result.Error', async function() {
+
+      const fn = () => asyncTry(() => Promise.reject(-1))
+      const result = await new Serial().
+        add(fn).
+        run()
+
+      expect(result.isError()).to.be.true
+      expect(result.get()).to.be.eq(-1)
+    })
+
+    it('when last function returns Promise.reject', async function() {
+
+      const fn1 = () => Promise.resolve(1)
+      const fn2 = () => Promise.reject(-1)
+      const result = await new Serial().
+        add(fn1).
+        add(fn2).
+        run()
+
+      expect(result.isError()).to.be.true
+      expect(result.get()).to.be.eq(-1)
+      expect(result.orElse('Error')).to.be.eq('Error')
+    })
+
+    it('when fn(args) returns Promise.reject', async function() {
+
+      const fn = () => Promise.reject(-1)
+      const result = await new Serial().
+        add(fn, 2).
+        run()
+
+      expect(result.isError()).to.be.true
+      expect(result.get()).to.be.eq(-1)
+    })
+
+    it('when fn(args) returns Result.Error', async function() {
+
+      const fn = () => asyncTry(() => Promise.reject(-1))
+      const result = await new Serial().
+        add(fn, 5).
+        run()
+
+      expect(result.isError()).to.be.true
+      expect(result.get()).to.be.eq(-1)
+    })
+
+    it('when last fn(args) returns Promise.reject', async function() {
+
+      const fn1 = () => Promise.resolve(1)
+      const fn2 = () => Promise.reject(-1)
+      const result = await new Serial().
+        add(fn1).
+        add(fn2, 7).
+        run()
+
+      expect(result.isError()).to.be.true
+      expect(result.get()).to.be.eq(-1)
+      expect(result.orElse('Error')).to.be.eq('Error')
+    })
   })
 
-  it('should return Ok to serial add with one fn', async function() {
+  context('should return Ok', function() {
 
-    const fnPromiseArgs = () => Promise.resolve(Ok(18))
+    it('when fn returns Promise.resolve', async function() {
 
-    const results = await Result
-    .serial()
-    .add(fnPromiseArgs)()
-    .run()
+      const fn = () => Promise.resolve(1)
+      const result = await new Serial().
+        add(fn).
+        run()
 
-    expect(results[0].isOk()).to.be.true
-    expect(results[0].get()).to.be.eq(18)
+      expect(result.isOk()).to.be.true
+      expect(first(result.get())).to.be.eq(1)
 
+    })
+
+    it('when both fns returns Promise.resolve', async function() {
+
+      const fn1 = () => Promise.resolve(1)
+      const fn2 = () => Promise.resolve(2)
+      const result = await new Serial().
+        add(fn1).
+        add(fn2).
+        run()
+
+      expect(result.isOk()).to.be.true
+      expect(first(result.get())).to.be.eq(1)
+      expect(result.get()[1]).to.be.eq(2)
+      
+    })
+
+    it('when fn returns Result.Ok', async function() {
+
+      const fn = () => asyncTry(() => Promise.resolve(1))
+      const result = await new Serial().
+        add(fn).
+        run()
+
+        expect(result.isOk()).to.be.true
+        expect(first(result.get())).to.be.eq(1)
+    })
+
+    it('when fn(args) returns Promise.resolve', async function() {
+
+      const fn = (args) => Promise.resolve(args)
+      const result = await new Serial().
+        add(fn, 22).
+        run()
+
+      expect(result.isOk()).to.be.true
+      expect(first(result.get())).to.be.eq(22)
+
+    })
+
+    it('when both fns returns Promise.resolve', async function() {
+
+      const fn1 = (arg) => Promise.resolve(arg)
+      const fn2 = (arg) => Promise.resolve(arg)
+      const result = await new Serial().
+        add(fn1, 33).
+        add(fn2, 55).
+        run()
+
+      expect(result.isOk()).to.be.true
+      expect(first(result.get())).to.be.eq(33)
+      expect(result.get()[1]).to.be.eq(55)
+      
+    })
+
+    it('when fn(args) returns Result.Ok', async function() {
+
+      const fn = (arg) => asyncTry(() => Promise.resolve(arg))
+      const result = await new Serial().
+        add(fn, 15).
+        run()
+
+        expect(result.isOk()).to.be.true
+        expect(first(result.get())).to.be.eq(15)
+    })
   })
-  it('should return Ok to serial add with one fn, one arg and one validation', async function() {
-
-    const isEmpty = (validate) => validate
-    const fnPromiseArgs = (fnArgs) => Promise.resolve(Ok(fnArgs))
-
-    const results = await Result
-    .serial()
-    .add(fnPromiseArgs, 10)(isEmpty)
-    .run()
-
-    expect(results[0].isOk()).to.be.true
-    expect(results[0].get()).to.be.eq(10)
-
-  })
-
-  it('should return Ok to serial add with two fn, two arg and two validation', async function() {
-
-    const isEmpty = (validate) => validate
-    const fnPromiseArgs = (fnArgs) => Promise.resolve(Ok(fnArgs))
-
-    const results = await Result
-    .serial()
-    .add(fnPromiseArgs, 10)(isEmpty)
-    .add(fnPromiseArgs, 20)(isEmpty)
-    .run()
-
-    expect(results[0].isOk()).to.be.true
-    expect(results[0].get()).to.be.eq(10)
-    expect(results[1].isOk()).to.be.true
-    expect(results[1].get()).to.be.eq(20)
-
-  })
-
-  it('should return Ok to serial add with one fn, two args and one validation', async function() {
-
-    const isEmpty = (validate) => validate
-    const fnPromiseArgs = (fnArgFirst, fnArgSecond) => Promise.resolve(Ok({ fnArgFirst, fnArgSecond }))
-
-    const results = await Result
-    .serial()
-    .add(fnPromiseArgs, 10, 20)(isEmpty)
-    .run()
-
-    expect(results[0].isOk()).to.be.true
-    expect(_.get(results[0].get(), 'fnArgFirst')).to.be.eq(10)
-    expect(_.get(results[0].get(), 'fnArgSecond')).to.be.eq(20)
-
-  })
-
-  it('should return Ok to serial add with two fns, one arg and one validation', async function() {
-
-    const isEmpty = (validate) => validate
-    const fnPromiseArgs = (fnArgs) => Promise.resolve(Ok(fnArgs))
-    const fnPromise = () => Promise.resolve(Ok('Without Args'))
-
-    const results = await Result
-    .serial()
-    .add(fnPromiseArgs, 33)(isEmpty)
-    .add(fnPromise)(isEmpty)
-    .run()
-
-    expect(results[0].isOk()).to.be.true
-    expect(results[0].get()).to.be.eq(33)
-    expect(results[1].isOk()).to.be.true
-    expect(results[1].get()).to.be.eq('Without Args')
-
-  })
-
-  it('should return Ok to serial add with one fn and one arg', async function() {
-
-    const fnPromiseArgs = (fnArgs) => Promise.resolve(Ok(fnArgs))
-    
-    const results = await Result
-    .serial()
-    .add(fnPromiseArgs, 10)()
-    .run()
-
-    expect(results[0].isOk()).to.be.true
-    expect(results[0].get()).to.be.eq(10)
-
-  })
-
-  it('should return Ok to serial add with two fns and one arg and one validation', async function() {
-
-    const isEmpty = (validate) => validate
-    const fnPromiseArgs = (fnArgs) => Promise.resolve(Ok(fnArgs))
-    const fnPromise = () => Promise.resolve(Ok('Without Args'))
-
-    const results = await Result
-    .serial()
-    .add(fnPromiseArgs, 33)()
-    .add(fnPromise)(isEmpty)
-    .run()
-
-    expect(results[0].isOk()).to.be.true
-    expect(results[0].get()).to.be.eq(33)
-    expect(results[1].isOk()).to.be.true
-    expect(results[1].get()).to.be.eq('Without Args')
-
-  })
-
-  it('should return Error when it is not a function', async function() {
-
-    const isEmpty = (validate) => validate
-    const fnPromiseErrorArgs = () => Promise.resolve(Error('Error'))
-    const fnPromiseArgs = (fnArgs) => Promise.resolve(Ok(fnArgs))
-
-    const results = await Result
-    .serial()
-    .add(fnPromiseErrorArgs)(isEmpty)
-    .add(fnPromiseArgs)(isEmpty)
-    .run()
-
-    expect(results[0].isError()).to.be.true
-
-  })
-
 })
