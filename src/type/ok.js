@@ -5,8 +5,8 @@ import flow from '../async'
 
 const serial = (fn, ...opts) => flow().serial(fn, ...opts)
 const chain = (fn) => flow().chain(fn)
-const serialSync = (fn, ...opts) => flowSync().serial(fn, ...opts)
-const chainSync = (fn) => flowSync().chain(fn)
+const serialSync = (fn, ...opts) => flowSync().serialSync(fn, ...opts)
+const chainSync = (fn) => flowSync().chainSync(fn)
 
 export default function Ok(value) {
 

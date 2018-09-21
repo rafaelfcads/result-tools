@@ -9,9 +9,9 @@ import run from './run'
 export default (fns = []) => {
 
   const methods = {
-    serial: (fn, ...opts) => add(methods)(fns)(serial, fn, opts),
-    chain: (fn) => add(methods)(fns)(chain, fn),
-    map: (fn) => add(methods)(fns)(map, fn),
+    serialSync: (fn, ...opts) => add(methods)(fns)(serial, fn, opts),
+    chainSync: (fn) => add(methods)(fns)(chain, fn),
+    mapSync: (fn) => add(methods)(fns)(map, fn),
     run: run(fns)
   }
   return methods

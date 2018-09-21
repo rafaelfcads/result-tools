@@ -10,8 +10,8 @@ import flowSync from './sync'
 
 const serial = (fn, ...opts) => flow().serial(fn, ...opts)
 const chain = (fn) => flow().chain(fn)
-const serialSync = (fn, ...opts) => flowSync().serial(fn, ...opts)
-const chainSync = (fn) => flowSync().chain(fn)
+const serialSync = (fn, ...opts) => flowSync().serialSync(fn, ...opts)
+const chainSync = (fn) => flowSync().chainSync(fn)
 
 export default { Type, Ok, Error, _try, trySync, serial, chain, serialSync, chainSync }
 export { Type, Ok, Error, _try, trySync, serial as Serial, chain as Chain, serialSync as SerialSync, chainSync as ChainSync }
