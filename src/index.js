@@ -3,15 +3,15 @@
 import Type from './type'
 import Ok from './type/ok'
 import Error from './type/error'
-import asyncTry from './asyncTry'
-import _try from './try'
-import asyncFlow from './asyncFlow'
-import flow from './flow'
+import _try from './async/try'
+import syncTry from './sync/try'
+import flow from './async'
+import syncFlow from './sync'
 
-const asyncSerial = (fn, ...opts) => asyncFlow().asyncSerial(fn, ...opts)
-const asyncChain = (fn) => asyncFlow().asyncChain(fn)
 const serial = (fn, ...opts) => flow().serial(fn, ...opts)
 const chain = (fn) => flow().chain(fn)
+const syncSerial = (fn, ...opts) => syncFlow().serial(fn, ...opts)
+const syncChain = (fn) => syncFlow().chain(fn)
 
-export default { Type, Ok, Error, _try, asyncTry, serial, chain, asyncSerial, asyncChain }
-export { Type, Ok, Error, _try, asyncTry, serial as Serial, chain as Chain, asyncSerial as AsyncSerial, asyncChain as AsyncChain }
+export default { Type, Ok, Error, _try, syncTry, serial, chain, syncSerial, syncChain }
+export { Type, Ok, Error, _try, syncTry, serial as Serial, chain as Chain, syncSerial as SyncSerial, syncChain as SyncChain }
