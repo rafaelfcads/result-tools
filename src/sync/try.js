@@ -1,6 +1,6 @@
 'use strict'
 
-import Type, { Ok, Error } from './type'
+import Type, { Ok, Error } from '../type'
 
 export default function _try(fn) {
 

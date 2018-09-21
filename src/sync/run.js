@@ -1,7 +1,7 @@
 'use strict'
 
 import serial from './serial'
-import Type, { Ok } from './type'
+import Type, { Ok } from '../type'
 
 const response = (result) => (results) => Type.isError(result)
   ? result
