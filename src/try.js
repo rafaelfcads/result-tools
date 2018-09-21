@@ -2,7 +2,7 @@
 
 import Type, { Ok, Error } from './type'
 
-export default function asyncTry(fn) {
+export default function _try(fn) {
 
   try {
 

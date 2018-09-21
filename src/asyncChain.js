@@ -2,4 +2,4 @@
 
 import asyncTry from './asyncTry'
 
-export default (fn) => (results) => asyncTry(() => fn(...results))
+export default (fn) => async(results) => await asyncTry(() => fn(...results))
