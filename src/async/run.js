@@ -1,11 +1,7 @@
 'use strict'
 
 import serial from './serial'
-import Type, { Ok } from './type'
-
-const response = (result) => (results) => Type.isError(result)
-  ? result
-  : Ok(results)
+import Type, { Ok } from '../type'
 
 export default (fns) => async() => {
 
@@ -14,11 +10,12 @@ export default (fns) => async() => {
 
   for (let [ fluentMethod, fn, opts ] of fns) {
     result = await fluentMethod(fn, opts)(results)
-    if (Type.isError(result)) break
+    if (Type.isError(result)) return result
     if (fluentMethod !== serial) results = []
     results.push(result.get())
   }
 
-  return response(result)(results)
+  return results.length === 1
+    ? Ok(results[0])
+    : Ok(results)
 }
-

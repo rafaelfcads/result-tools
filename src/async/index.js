@@ -1,6 +1,6 @@
 'use strict'
 
-import add from './add'
+import add from '../sync/add'
 import chain from './chain'
 import serial from './serial'
 import map from './map'
@@ -16,4 +16,5 @@ export default (fns = []) => {
   }
   return methods
 }
+
 

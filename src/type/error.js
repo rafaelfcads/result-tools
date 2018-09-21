@@ -10,7 +10,8 @@ export default function Error(value) {
     get: () => value,
     serial: () => methods,
     chain: () => methods,
-    map: () => methods
+    serialSync: () => methods,
+    chainSync: () => methods,
     
   }
   return methods
