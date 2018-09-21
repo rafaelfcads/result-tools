@@ -1,12 +1,12 @@
 'use strict'
 
-import syncFlow from '../sync'
+import flowSync from '../sync'
 import flow from '../async'
 
 const serial = (fn, ...opts) => flow().serial(fn, ...opts)
 const chain = (fn) => flow().chain(fn)
-const syncSerial = (fn, ...opts) => syncFlow().serial(fn, ...opts)
-const syncChain = (fn) => syncFlow().chain(fn)
+const serialSync = (fn, ...opts) => flowSync().serial(fn, ...opts)
+const chainSync = (fn) => flowSync().chain(fn)
 
 export default function Ok(value) {
 
@@ -17,9 +17,9 @@ export default function Ok(value) {
     orElse: () => value,
     get: () => value,
     serial: (fn, ...opts) => serial(() => value).serial(fn, ...opts),
-    chain: (fn) => chain(() => value).serial(fn),
-    syncSerial: (fn, ...opts) => syncSerial(() => value).serial(fn, ...opts),
-    syncChain: (fn) => syncChain(() => value).serial(fn)
+    chain: (fn) => chain(() => value).chain(fn),
+    serialSync: (fn, ...opts) => serialSync(() => value).serial(fn, ...opts),
+    chainSync: (fn) => chainSync(() => value).chain(fn)
     
   }
 }
