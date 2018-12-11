@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "eslint .",
     "test": "nyc --require babel-core/register mocha --recursive --exit",
-    "posttest": "nyc report --reporter=html && nyc check-coverage --lines 30 --functions 30 --branches 30",
+    "posttest": "nyc report --reporter=html && nyc check-coverage --lines 80 --functions 80 --branches 80",
     "build": "babel src -d dist",
     "postinstall": "npm run build"
   },

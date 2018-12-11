@@ -22,4 +22,49 @@ describe('Type.Ok', function() {
     const value = { key: 'value'}
     expect(Ok(value).get()).to.be.deep.eq(value)
   })
+
+  it('serial() should return Ok value', async function() {
+    const fnPromise = (argOne, argTwo) => [argOne, argTwo]
+    const value = { key: 'value'}
+    const result = await Ok(value).serial(fnPromise, [4, 2])
+
+    expect(result.serial).to.be.ok
+    expect(result.chain).to.be.ok
+    expect(result.map).to.be.ok
+    expect(result.run).to.be.ok
+  })
+
+  it('serialSync() should return Ok value', async function() {
+    const fnPromise = (argOne, argTwo) => [argOne, argTwo]
+    const value = { key: 'value'}
+    const result = Ok(value).serialSync(fnPromise, [4, 2])
+
+    expect(result.serialSync).to.be.ok
+    expect(result.chainSync).to.be.ok
+    expect(result.mapSync).to.be.ok
+    expect(result.run).to.be.ok
+  })
+
+  it('chain() should return Ok value', async function() {
+    const fnPromise = (argOne, argTwo) => [argOne, argTwo]
+    const value = { key: 'value'}
+    const result = await Ok(value).chain(fnPromise)
+
+    expect(result.serial).to.be.ok
+    expect(result.chain).to.be.ok
+    expect(result.map).to.be.ok
+    expect(result.run).to.be.ok
+  })
+
+  it('chainSync() should return Ok value', async function() {
+    const fnPromise = (argOne, argTwo) => [argOne, argTwo]
+    const value = { key: 'value'}
+    const result = Ok(value).chainSync(fnPromise)
+    
+    expect(result.serialSync).to.be.ok
+    expect(result.chainSync).to.be.ok
+    expect(result.mapSync).to.be.ok
+    expect(result.run).to.be.ok
+  })
+  
 })
