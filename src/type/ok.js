@@ -4,9 +4,7 @@ import flowSync from '../sync'
 import flow from '../async'
 
 const serial = (fn, ...opts) => flow().serial(fn, ...opts)
-const chain = (fn) => flow().chain(fn)
 const serialSync = (fn, ...opts) => flowSync().serialSync(fn, ...opts)
-const chainSync = (fn) => flowSync().chainSync(fn)
 
 export default function Ok(value) {
 
@@ -16,10 +14,10 @@ export default function Ok(value) {
     isError: () => false,
     orElse: () => value,
     get: () => value,
-    serial: (fn, ...opts) => serial(() => value).serial(fn, ...opts),
-    chain: (fn) => chain(() => value).chain(fn),
-    serialSync: (fn, ...opts) => serialSync(() => value).serial(fn, ...opts),
-    chainSync: (fn) => chainSync(() => value).chain(fn)
+    serial: (fn, ...opts) => serial((arg) => arg, value).serial(fn, ...opts),
+    chain: (fn) => serial((arg) => arg, value).chain(fn),
+    serialSync: (fn, ...opts) => serialSync((arg) => arg, value).serialSync(fn, ...opts),
+    chainSync: (fn) => serialSync((arg) => arg, value).chainSync(fn)
     
   }
 }
