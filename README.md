@@ -7,6 +7,7 @@ ResultTools
 
 
 ResultTools is a standard library for functional programming in JavaScript.
+The library aims to give developers an auxiliary tool in the modeling of operations results.
 
 
 ## Installing
