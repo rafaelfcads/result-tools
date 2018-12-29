@@ -9,12 +9,18 @@ ResultTools
 
 
 ResultTools is a standard library for JavaScript functional programming.
-The ResultTools library goal is to give developers an auxiliary tool for modeling results of sync and async operations. Voiding the try/catch need, therefor, providing better control of sequences operations, error handling and propagation.
-The operation results may be, Ok(successful Value) or Error(error Value). Based upon the operation results is   possible to use fluent features such as .chain, .serial and .map to execute sync and async sequences operations in a controlled way.
 
-> `.chain` should be used to execute operations where this one will be receiving the lasts operations results like arguments to generate a new result.
-> `.serial` should be used to execute operations where this one could receive arguments to generate a new result.
-> `.map` should be used to execute transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
+
+The ResultTools library goal is to give developers an auxiliary tool for modeling results of sync and async operations. Voiding the try/catch need, therefor, providing better control of sequences operations, error handling and propagation.
+
+
+The operation results may be, Ok(successful Value) or Error(error Value). Based upon the operation results is   possible to use fluent features such as `.chain`, `.serial` and `.map` to execute sync and async sequences operations in a controlled way.
+
+`.chain` should be used to execute operations where this one will be receiving the lasts operations results like arguments to generate a new result.
+
+`.serial` should be used to execute operations where this one could receive arguments to generate a new result.
+
+`.map` should be used to execute transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
 
 ## Installing
