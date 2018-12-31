@@ -17,6 +17,12 @@ The operation results may be, Ok(successful Value) or Error(error Value). Based 
 
 **`_try`** should be used to execute async operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
+```js
+const Result = require('result-tool');
+
+Result._try(fn)
+```
+
 **`trySync`** should be used to execute sync operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
 **`.chain`** should be used to execute async operations where this one will be receiving the lasts operations results like arguments to generate a new result.
