@@ -15,17 +15,24 @@ The ResultTools library goal is to give developers an auxiliary tool for modelin
 Async operations may be performed by the **`_try`** or sync operations by the **`trySync`**. 
 The operation results may be, Ok(successful Value) or Error(error Value). Based upon the operation results is   possible to use fluent features such as **`.chain`**, **`.serial`** and **`.map`** to execute sync and async sequences operations in a controlled way.
 
-**`_try`** should be used to execute async operations. The operation results may be, Ok(successful Value) or Error(error Value).
+## Installing
+
+Result Tools can be installed through [npm][]:
+
+    $ npm install result-tools
+
 
 ### Example
+
+**`_try(fn)`** should be used to execute async operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
 error case:
 ```js
 const Result = require('result-tool');
 
-const fnPromise = () => Promise.reject(-1)
+const fnPromise = () => Promise.reject(-1);
 
-Result._try(fnPromise)
+Result._try(fnPromise);
 
 // ==> Result.Error(-1)
 ```
@@ -34,63 +41,55 @@ successful case:
 ```js
 const Result = require('result-tool');
 
-const fnPromise = () => Promise.resolve('Voiding the try/catch need')
+const fnPromise = () => Promise.resolve('Voiding the try/catch need');
 
-Result._try(fnPromise)
+Result._try(fnPromise);
 
 // ==> Result.Ok('Voiding the try/catch need')
 ```
 
-**`trySync`** should be used to execute sync operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
-### Example
+**`trySync(fn)`** should be used to execute sync operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
-.chain in error case:
+error case:
 ```js
 const Result = require('result-tool');
 
-const fnPromise = () => Promise.reject(-1)
+const fnPromise = () => Error(-1);
+
+Result.trySync(fnPromise);
+
+// ==> Result.Error(-1)
+```
+
+successful case:
+```js
+const Result = require('result-tool');
+
+const fnPromise = () => Ok('Voiding the try/catch need');
+
+Result.trySync(fnPromise);
+
+// ==> Result.Ok('Voiding the try/catch need')
+```
+
+
+**`.chain(fn)`** should be used to execute async operations where this one will be receiving the lasts operations results like arguments to generate a new result.
+
+
+error case:
+```js
+const Result = require('result-tool');
+
+const fnPromise = () => Promise.reject(-1);
 
 //operation will not be performed
-const fnChain = () => Promise.resolve('Voiding the try/catch need')
+const fnChain = (arg) => Promise.resolve(arg);
 
 Result
   ._try(fnPromise)
   .chain(fnChain)
   .run();
-
-// ==> Result.Error(-1)
-```
-
-.chain in successful case:
-```js
-const Result = require('result-tool');
-
-const fnPromise = () => Promise.resolve('Voiding the try/catch need')
-
-const fnChain = () => Promise.resolve('Voiding the try/catch need')
-
-Result
-  ._try(fnPromise)
-  .chain(fnChain)
-  .run();
-
-// ==> Result.Ok('Voiding the try/catch need')
-```
-
-**`.chain`** should be used to execute async operations where this one will be receiving the lasts operations results like arguments to generate a new result.
-
-### Example
-
-error case:
-```js
-const Result = require('result-tool');
-
-const fnPromise = () => Error(-1)
-
-const fnChain = () => 
-
-Result.trySync(fnPromise)
 
 // ==> Result.Error(-1)
 ```
@@ -99,9 +98,14 @@ successful case:
 ```js
 const Result = require('result-tool');
 
-const fnPromise = () => Ok('Voiding the try/catch need')
+const fnPromise = () => Promise.resolve('Voiding the');
 
-Result.trySync(fnPromise)
+const fnChain = (arg) => Promise.resolve(`${arg} try/catch need`);
+
+Result
+  ._try(fnPromise)
+  .chain(fnChain)
+  .run();
 
 // ==> Result.Ok('Voiding the try/catch need')
 ```
@@ -115,13 +119,6 @@ Result.trySync(fnPromise)
 **`.map`** should be used to execute async transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
 **`.mapSync`** should be used to execute sync transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
-
-
-## Installing
-
-Result Tools can be installed through [npm][]:
-
-    $ npm install result-tools
 
 ## Supported platforms
 
