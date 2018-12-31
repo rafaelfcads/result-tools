@@ -20,7 +20,11 @@ The operation results may be, Ok(successful Value) or Error(error Value). Based 
 ```js
 const Result = require('result-tool');
 
+const fn = async () =>  'Voiding the try/catch need';
+
 Result._try(fn)
+
+// ==> Result.Ok('Voiding the try/catch need')
 ```
 
 **`trySync`** should be used to execute sync operations. The operation results may be, Ok(successful Value) or Error(error Value).
