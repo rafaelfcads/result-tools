@@ -17,7 +17,7 @@ The operation results may be, Ok(successful Value) or Error(error Value). Based 
 
 ## Installing
 
-Result Tools can be installed through [npm][]:
+ResultTools can be installed through [npm][]:
 
     $ npm install result-tools
 
