@@ -45,11 +45,50 @@ Result._try(fnPromise)
 
 ### Example
 
+.chain in error case:
+```js
+const Result = require('result-tool');
+
+const fnPromise = () => Promise.reject(-1)
+
+//operation will not be performed
+const fnChain = () => Promise.resolve('Voiding the try/catch need')
+
+Result
+  ._try(fnPromise)
+  .chain(fnChain)
+  .run();
+
+// ==> Result.Error(-1)
+```
+
+.chain in successful case:
+```js
+const Result = require('result-tool');
+
+const fnPromise = () => Promise.resolve('Voiding the try/catch need')
+
+const fnChain = () => Promise.resolve('Voiding the try/catch need')
+
+Result
+  ._try(fnPromise)
+  .chain(fnChain)
+  .run();
+
+// ==> Result.Ok('Voiding the try/catch need')
+```
+
+**`.chain`** should be used to execute async operations where this one will be receiving the lasts operations results like arguments to generate a new result.
+
+### Example
+
 error case:
 ```js
 const Result = require('result-tool');
 
 const fnPromise = () => Error(-1)
+
+const fnChain = () => 
 
 Result.trySync(fnPromise)
 
@@ -66,8 +105,6 @@ Result.trySync(fnPromise)
 
 // ==> Result.Ok('Voiding the try/catch need')
 ```
-
-**`.chain`** should be used to execute async operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
 **`.chainSync`** should be used to execute sync operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
