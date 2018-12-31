@@ -26,7 +26,7 @@ ResultTools can be installed through [npm][]:
 
 - **`_try(fn)`** should be used to execute async operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
-  ##### error case:
+  ###### error case:
   ```js
   const Result = require('result-tool');
 
@@ -37,7 +37,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ##### successful case:
+  ###### successful case:
   ```js
   const Result = require('result-tool');
 
@@ -51,7 +51,7 @@ ResultTools can be installed through [npm][]:
 
 - **`trySync(fn)`** should be used to execute sync operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
-  ##### error case:
+  ###### error case:
   ```js
   const Result = require('result-tool');
 
@@ -62,7 +62,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ##### successful case:
+  ###### successful case:
   ```js
   const Result = require('result-tool');
 
@@ -77,7 +77,7 @@ ResultTools can be installed through [npm][]:
 - **`.chain(fn)`** should be used to execute async operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
 
-  ##### error case:
+  ###### error case:
   ```js
   const Result = require('result-tool');
 
@@ -94,7 +94,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ##### successful case:
+  ###### successful case:
   ```js
   const Result = require('result-tool');
 
