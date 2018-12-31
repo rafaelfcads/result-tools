@@ -17,6 +17,9 @@ The operation results may be, Ok(successful Value) or Error(error Value). Based 
 
 **`_try`** should be used to execute async operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
+### Example
+
+error case:
 ```js
 const Result = require('result-tool');
 
@@ -27,7 +30,7 @@ Result._try(fnPromise)
 // ==> Result.Error(-1)
 ```
 
-
+successful case:
 ```js
 const Result = require('result-tool');
 
@@ -40,6 +43,9 @@ Result._try(fnPromise)
 
 **`trySync`** should be used to execute sync operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
+### Example
+
+error case:
 ```js
 const Result = require('result-tool');
 
@@ -50,7 +56,7 @@ Result.trySync(fnPromise)
 // ==> Result.Error(-1)
 ```
 
-
+successful case:
 ```js
 const Result = require('result-tool');
 
