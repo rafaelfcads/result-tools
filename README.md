@@ -217,6 +217,39 @@ ResultTools can be installed through [npm][]:
 
 - **`.map`** should be used to execute async transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Promise.reject(-1);
+
+  //operation will not be performed
+  const fnMap = (arg) => Promise.resolve(arg);
+
+  Result
+    ._try(fnPromise)
+    .map(fnMap)
+    .run();
+
+  // ==> Result.Error(-1)
+  ```
+
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Promise.resolve('Voiding the');
+
+  const fnMap = (arg) => Promise.resolve(`${arg} try/catch need`);
+
+  Result
+    ._try(fnPromise)
+    .map(fnChain)
+    .run();
+
+  // ==> Result.Ok('Voiding the try/catch need')
+  ```
+
 - **`.mapSync`** should be used to execute sync transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
 - **`.get`**
