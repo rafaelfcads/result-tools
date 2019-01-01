@@ -285,7 +285,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok('Voiding the try/catch need')
   ```
 
-- **`.get`** should be used to access the result value.
+- **`get`** should be used to access the result value.
 
   ###### error case:
   ```js
@@ -314,6 +314,32 @@ ResultTools can be installed through [npm][]:
   ```
 
 - **`orElse(arg)`** should be used to access the successful value or argument value in errors cases.
+
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Error(-1);
+
+  Result
+    .trySync(fnPromise)
+    .orElse('There is an error');
+
+  // ==> There is an error
+  ```
+
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Ok('Voiding the try/catch need');
+
+  Result
+    .trySync(fnPromise)
+    .orElse('There is an error');
+
+  // ==> 'Voiding the try/catch need'
+  ```
 
 - **`.isOk`**
 
