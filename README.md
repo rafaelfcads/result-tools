@@ -123,7 +123,7 @@ ResultTools can be installed through [npm][]:
 
   Result
     .trySync(fnPromise)
-    .chain(fnChain)
+    .chainSync(fnChain)
     .run();
 
   // ==> Result.Error(-1)
@@ -139,7 +139,7 @@ ResultTools can be installed through [npm][]:
 
   Result
     .trySync(fnPromise)
-    .chain(fnChain)
+    .chainSync(fnChain)
     .run();
 
   // ==> Result.Ok('Voiding the try/catch need')
@@ -147,7 +147,73 @@ ResultTools can be installed through [npm][]:
 
 - **`.serial`** should be used to execute async operations where this one could receive arguments to generate a new result.
 
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Promise.reject(-1);
+
+  //operation will not be performed
+  const fnSerial = (arg) => Promise.resolve(arg);
+
+  Result
+    ._try(fnPromise)
+    .serial(fnSerial, 2)
+    .run();
+
+  // ==> Result.Error(-1)
+  ```
+
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Promise.resolve(4);
+
+  const fnSerial = (arg) => Promise.resolve(arg);
+
+  Result
+    ._try(fnPromise)
+    .serial(fnSerial, 2)
+    .run();
+
+  // ==> Result.Ok([4, 2])
+  ```
+
 - **`.serialSync`** should be used to execute sync operations where this one could receive arguments to generate a new result.
+
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Error(-1);
+
+  //operation will not be performed
+  const fnSerial = (arg) => Ok(arg);
+
+  Result
+    .trySync(fnPromise)
+    .serialSync(fnSerial, 2)
+    .run();
+
+  // ==> Result.Error(-1)
+  ```
+
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Ok(4);
+
+  const fnSerial = (arg) => Ok(arg);
+
+  Result
+    .trySync(fnPromise)
+    .serialSync(fnSerial, 2)
+    .run();
+
+  // ==> Result.Ok([4, 2])
+  ```
 
 - **`.map`** should be used to execute async transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
