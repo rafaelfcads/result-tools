@@ -244,13 +244,46 @@ ResultTools can be installed through [npm][]:
 
   Result
     ._try(fnPromise)
-    .map(fnChain)
+    .map(fnMap)
     .run();
 
   // ==> Result.Ok('Voiding the try/catch need')
   ```
 
 - **`.mapSync`** should be used to execute sync transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
+
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Error(-1);
+
+  //operation will not be performed
+  const fnMap = (arg) => Ok(arg);
+
+  Result
+    .trySync(fnPromise)
+    .mapSync(fnMap)
+    .run();
+
+  // ==> Result.Error(-1)
+  ```
+
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Ok('Voiding the');
+
+  const fnMap = (arg) => Ok(`${arg} try/catch need`);
+
+  Result
+    .trySync(fnPromise)
+    .mapSync(fnMap)
+    .run();
+
+  // ==> Result.Ok('Voiding the try/catch need')
+  ```
 
 - **`.get`**
 
