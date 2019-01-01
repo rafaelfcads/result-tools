@@ -285,7 +285,33 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok('Voiding the try/catch need')
   ```
 
-- **`.get`**
+- **`.get`** should be used to access the result value.
+
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Error(-1);
+
+  Result
+    .trySync(fnPromise)
+    .get();
+
+  // ==> -1
+  ```
+
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Ok('Voiding the try/catch need');
+
+  Result
+    .trySync(fnPromise)
+    .get();
+
+  // ==> 'Voiding the try/catch need'
+  ```
 
 - **`.orElse`**
 
