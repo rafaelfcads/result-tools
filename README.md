@@ -13,7 +13,7 @@ ResultTools is a standard library for JavaScript functional programming.
 The ResultTools library goal is to give developers an auxiliary tool for modeling results of sync and async operations. Voiding the try/catch need, therefor, providing better control of sequences operations, error handling and propagation.
 
 Async operations can be performed by the **`_try`** and **`trySync`** operation to performed sync operations. 
-The operations results may be, Ok(successful Value) or Error(error Value) and can be accessed through the get or orElse operations. The operations results offer tests through the isOk or isError operations. Based upon the operation results is possible to use fluent features such as **`.chain`**, **`.chainSync`**, **`.serial`**,  **`.serialSync`**, **`.map`** and **`.mapSync`** to execute sync and async sequences operations in a controlled way. Operations can also be performed in isolation without the need to perform the try operation.
+The operations results may be, **`Ok(successful Value)`** or **`Error(error Value)`** and can be accessed through the **`get`** or **`orElse`** operations. The operations results offer tests through the **`isOk`** or **`isError`** operations. Based upon the operation results is possible to use fluent features such as **`.chain`**, **`.chainSync`**, **`.serial`**,  **`.serialSync`**, **`.map`** and **`.mapSync`** to execute sync and async sequences operations in a controlled way. Operations can also be performed in isolation without the need to perform the try operation.
 
 ## Installing
 
