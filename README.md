@@ -26,194 +26,194 @@ ResultTools can be installed through [npm][]:
 
 - **`_try(fn)`** should be used to execute async operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
-    ###### error case:
-    ```js
-    const Result = require('result-tool');
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Promise.reject(-1);
+  const fnPromise = () => Promise.reject(-1);
 
-    Result._try(fnPromise);
+  Result._try(fnPromise);
 
-    // ==> Result.Error(-1)
-    ```
+  // ==> Result.Error(-1)
+  ```
 
-    ###### successful case:
-    ```js
-    const Result = require('result-tool');
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Promise.resolve('Voiding the try/catch need');
+  const fnPromise = () => Promise.resolve('Voiding the try/catch need');
 
-    Result._try(fnPromise);
+  Result._try(fnPromise);
 
-    // ==> Result.Ok('Voiding the try/catch need')
-    ```
+  // ==> Result.Ok('Voiding the try/catch need')
+  ```
 
 
 - **`trySync(fn)`** should be used to execute sync operations. The operation results may be, Ok(successful Value) or Error(error Value).
 
-    ###### error case:
-    ```js
-    const Result = require('result-tool');
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Error(-1);
+  const fnPromise = () => Error(-1);
 
-    Result.trySync(fnPromise);
+  Result.trySync(fnPromise);
 
-    // ==> Result.Error(-1)
-    ```
+  // ==> Result.Error(-1)
+  ```
 
-    ###### successful case:
-    ```js
-    const Result = require('result-tool');
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Ok('Voiding the try/catch need');
+  const fnPromise = () => Ok('Voiding the try/catch need');
 
-    Result.trySync(fnPromise);
+  Result.trySync(fnPromise);
 
-    // ==> Result.Ok('Voiding the try/catch need')
-    ```
+  // ==> Result.Ok('Voiding the try/catch need')
+  ```
 
 
 - **`chain(fn)`** should be used to execute async operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
 
-    ###### error case:
-    ```js
-    const Result = require('result-tool');
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Promise.reject(-1);
+  const fnPromise = () => Promise.reject(-1);
 
-    //operation will not be performed
-    const fnChain = (arg) => Promise.resolve(arg);
+  //operation will not be performed
+  const fnChain = (arg) => Promise.resolve(arg);
 
-    Result
-      ._try(fnPromise)
-      .chain(fnChain)
-      .run();
+  Result
+    ._try(fnPromise)
+    .chain(fnChain)
+    .run();
 
-    // ==> Result.Error(-1)
-    ```
+  // ==> Result.Error(-1)
+  ```
 
-    ###### successful case:
-    ```js
-    const Result = require('result-tool');
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Promise.resolve('Voiding the');
+  const fnPromise = () => Promise.resolve('Voiding the');
 
-    const fnChain = (arg) => Promise.resolve(`${arg} try/catch need`);
+  const fnChain = (arg) => Promise.resolve(`${arg} try/catch need`);
 
-    Result
-      ._try(fnPromise)
-      .chain(fnChain)
-      .run();
+  Result
+    ._try(fnPromise)
+    .chain(fnChain)
+    .run();
 
-    // ==> Result.Ok('Voiding the try/catch need')
-    ```
+  // ==> Result.Ok('Voiding the try/catch need')
+  ```
 
 - **`chainSync(fn)`** should be used to execute sync operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
-    ###### error case:
-    ```js
-    const Result = require('result-tool');
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Error(-1);
+  const fnPromise = () => Error(-1);
 
-    //operation will not be performed
-    const fnChain = (arg) => Ok(arg);
+  //operation will not be performed
+  const fnChain = (arg) => Ok(arg);
 
-    Result
-      .trySync(fnPromise)
-      .chainSync(fnChain)
-      .run();
+  Result
+    .trySync(fnPromise)
+    .chainSync(fnChain)
+    .run();
 
-    // ==> Result.Error(-1)
-    ```
+  // ==> Result.Error(-1)
+  ```
 
-    ###### successful case:
-    ```js
-    const Result = require('result-tool');
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Ok('Voiding the');
+  const fnPromise = () => Ok('Voiding the');
 
-    const fnChain = (arg) => Ok(`${arg} try/catch need`);
+  const fnChain = (arg) => Ok(`${arg} try/catch need`);
 
-    Result
-      .trySync(fnPromise)
-      .chainSync(fnChain)
-      .run();
+  Result
+    .trySync(fnPromise)
+    .chainSync(fnChain)
+    .run();
 
-    // ==> Result.Ok('Voiding the try/catch need')
-    ```
+  // ==> Result.Ok('Voiding the try/catch need')
+  ```
 
 - **`serial(fn, fnArgs)`** should be used to execute async operations where this one could receive arguments to generate a new result.
 
-    ###### error case:
-    ```js
-    const Result = require('result-tool');
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Promise.reject(-1);
+  const fnPromise = () => Promise.reject(-1);
 
-    //operation will not be performed
-    const fnSerial = (arg) => Promise.resolve(arg);
+  //operation will not be performed
+  const fnSerial = (arg) => Promise.resolve(arg);
 
-    Result
-      ._try(fnPromise)
-      .serial(fnSerial, 2)
-      .run();
+  Result
+    ._try(fnPromise)
+    .serial(fnSerial, 2)
+    .run();
 
-    // ==> Result.Error(-1)
-    ```
+  // ==> Result.Error(-1)
+  ```
 
-    ###### successful case:
-    ```js
-    const Result = require('result-tool');
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Promise.resolve(4);
+  const fnPromise = () => Promise.resolve(4);
 
-    const fnSerial = (arg) => Promise.resolve(arg);
+  const fnSerial = (arg) => Promise.resolve(arg);
 
-    Result
-      ._try(fnPromise)
-      .serial(fnSerial, 2)
-      .run();
+  Result
+    ._try(fnPromise)
+    .serial(fnSerial, 2)
+    .run();
 
-    // ==> Result.Ok([4, 2])
-    ```
+  // ==> Result.Ok([4, 2])
+  ```
 
 - **`serialSync(fn, fnArgs)`** should be used to execute sync operations where this one could receive arguments to generate a new result.
 
-    ###### error case:
-    ```js
-    const Result = require('result-tool');
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Error(-1);
+  const fnPromise = () => Error(-1);
 
-    //operation will not be performed
-    const fnSerial = (arg) => Ok(arg);
+  //operation will not be performed
+  const fnSerial = (arg) => Ok(arg);
 
-    Result
-      .trySync(fnPromise)
-      .serialSync(fnSerial, 2)
-      .run();
+  Result
+    .trySync(fnPromise)
+    .serialSync(fnSerial, 2)
+    .run();
 
-    // ==> Result.Error(-1)
-    ```
+  // ==> Result.Error(-1)
+  ```
 
-    ###### successful case:
-    ```js
-    const Result = require('result-tool');
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
 
-    const fnPromise = () => Ok(4);
+  const fnPromise = () => Ok(4);
 
-    const fnSerial = (arg) => Ok(arg);
+  const fnSerial = (arg) => Ok(arg);
 
-    Result
-      .trySync(fnPromise)
-      .serialSync(fnSerial, 2)
-      .run();
+  Result
+    .trySync(fnPromise)
+    .serialSync(fnSerial, 2)
+    .run();
 
-    // ==> Result.Ok([4, 2])
-    ```
+  // ==> Result.Ok([4, 2])
+  ```
 
 - **`.map`** should be used to execute async transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
