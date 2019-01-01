@@ -313,7 +313,7 @@ ResultTools can be installed through [npm][]:
   // ==> 'Voiding the try/catch need'
   ```
 
-- **`.orElse`**
+- **`orElse(arg)`** should be used to access the successful value or argument value in errors cases.
 
 - **`.isOk`**
 
