@@ -341,7 +341,7 @@ ResultTools can be installed through [npm][]:
   // ==> 'Voiding the try/catch need'
   ```
 
-- **`.isOk`**
+- **`.isOk`** should be used to test the result value.
 
 - **`.isError`**
 
