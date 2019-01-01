@@ -215,7 +215,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok([4, 2])
   ```
 
-- **`.map`** should be used to execute async transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
+- **`map(fn)`** should be used to execute async transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
   ###### error case:
   ```js
@@ -250,7 +250,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok('Voiding the try/catch need')
   ```
 
-- **`.mapSync`** should be used to execute sync transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
+- **`mapSync(fn)`** should be used to execute sync transformation operations where this one will be receiving the lasts operations results like arguments to generate a new result.
 
   ###### error case:
   ```js
