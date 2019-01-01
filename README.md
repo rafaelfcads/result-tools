@@ -343,6 +343,44 @@ ResultTools can be installed through [npm][]:
 
 - **`isOk`** should be used to test the result value.
 
+  ###### error case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Error(-1);
+
+  Result
+    .trySync(fnPromise)
+    .isOk();
+
+  // ==> false
+
+  Result
+    .trySync(fnPromise)
+    .isError();
+
+  // ==> true
+  ```
+
+  ###### successful case:
+  ```js
+  const Result = require('result-tool');
+
+  const fnPromise = () => Ok('Voiding the try/catch need');
+
+  Result
+    .trySync(fnPromise)
+    .isOk();
+
+  // ==> true
+
+  Result
+    .trySync(fnPromise)
+    .isError();
+
+  // ==> false
+  ```
+
 - **`isError`** should be used to test the result value.
 
 ## Supported platforms
