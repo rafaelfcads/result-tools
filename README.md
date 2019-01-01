@@ -343,7 +343,7 @@ ResultTools can be installed through [npm][]:
 
 - **`.isOk`** should be used to test the result value.
 
-- **`.isError`**
+- **`.isError`** should be used to test the result value.
 
 ## Supported platforms
 
