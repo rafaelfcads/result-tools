@@ -13,7 +13,7 @@ ResultTools is a standard library for JavaScript functional programming.
 The ResultTools library goal is to provide developers an auxiliary tool for modeling results of sync and async operations. Annuls the try/catch need, therefor, allowing better control of sequence operations, error handling and propagation.
 
 Async operations can be performed by the **`_try`** and **`trySync`** operation to perform sync operations. 
-The operation results are, **`Ok(successful Value)`** or **`Error(error Value)`** and can be accessed through the **`get`** or **`orElse`** operations. These results offer tests through the **`isOk`** or **`isError`** operations. Based on the operation results it is possible to use fluent features, such as **`.chain`**, **`.chainSync`**, **`.serial`**,  **`.serialSync`**, **`.map`** and **`.mapSync`** to execute sync and async sequence operations in a controlled way.
+The operation results are, **`Ok(success Value)`** or **`Error(error Value)`** and can be accessed through the **`get`** or **`orElse`** operations. These results offer tests through the **`isOk`** or **`isError`** operations. Based on the operation results it is possible to use fluent features, such as **`.chain`**, **`.chainSync`**, **`.serial`**,  **`.serialSync`**, **`.map`** and **`.mapSync`** to execute sync and async sequence operations in a controlled way.
 Also, there is no need to perform the try operation, since it can be used in isolation.
 
 ## Installation
@@ -25,7 +25,7 @@ ResultTools can be installed through [npm][]:
 
 ### Example
 
-- **`_try(fn)`** Used to execute async operations. The operation result can be either Ok(successful Value) or Error(error Value).
+- **`_try(fn)`** Used to execute async operations. The operation result can be either Ok(success Value) or Error(error Value).
 
   ###### error case:
   ```js
@@ -38,7 +38,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -50,7 +50,7 @@ ResultTools can be installed through [npm][]:
   ```
 
 
-- **`trySync(fn)`** Used to execute sync operations. The operation result can be either Ok(successful Value) or Error(error Value).
+- **`trySync(fn)`** Used to execute sync operations. The operation result can be either Ok(success Value) or Error(error Value).
 
   ###### error case:
   ```js
@@ -63,7 +63,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -95,7 +95,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -130,7 +130,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -165,7 +165,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -200,7 +200,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -235,7 +235,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -270,7 +270,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Error(-1)
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -301,7 +301,7 @@ ResultTools can be installed through [npm][]:
   // ==> -1
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -314,7 +314,7 @@ ResultTools can be installed through [npm][]:
   // ==> 'Annuls the try/catch need'
   ```
 
-- **`orElse(arg)`** Used to access the successful value or argument value in error cases.
+- **`orElse(arg)`** Used to access the success value or argument value in error cases.
 
   ###### error case:
   ```js
@@ -329,7 +329,7 @@ ResultTools can be installed through [npm][]:
   // ==> There is an error
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -357,7 +357,7 @@ ResultTools can be installed through [npm][]:
   // ==> false
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
@@ -385,7 +385,7 @@ ResultTools can be installed through [npm][]:
   // ==> true
   ```
 
-  ###### successful case:
+  ###### success case:
   ```js
   const Result = require('result-tool');
 
