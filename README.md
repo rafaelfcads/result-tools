@@ -25,7 +25,7 @@ ResultTools can be installed through [npm][]:
 
 ### Example
 
-- **`_try(fn)`** should be used to execute async operations. The operation result can be either Ok(successful Value) or Error(error Value).
+- **`_try(fn)`** Used to execute async operations. The operation result can be either Ok(successful Value) or Error(error Value).
 
   ###### error case:
   ```js
@@ -50,7 +50,7 @@ ResultTools can be installed through [npm][]:
   ```
 
 
-- **`trySync(fn)`** should be used to execute sync operations. The operation result can be either Ok(successful Value) or Error(error Value).
+- **`trySync(fn)`** Used to execute sync operations. The operation result can be either Ok(successful Value) or Error(error Value).
 
   ###### error case:
   ```js
@@ -75,7 +75,7 @@ ResultTools can be installed through [npm][]:
   ```
 
 
-- **`chain(fn)`** should be used to execute async operations where the arguments are the results from the last operation, generating a new result. 
+- **`chain(fn)`** Used to execute async operations where the arguments are the results from the last operation, generating a new result. 
 
 
   ###### error case:
@@ -111,7 +111,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok('Annuls the try/catch need')
   ```
 
-- **`chainSync(fn)`** should be used to execute sync operations where the arguments are the results from the last operation, generating a new result.
+- **`chainSync(fn)`** Used to execute sync operations where the arguments are the results from the last operation, generating a new result.
 
   ###### error case:
   ```js
@@ -146,7 +146,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok('Annuls the try/catch need')
   ```
 
-- **`serial(fn, fnArgs)`** should be used to execute async operations where the arguments could be received, generating a new result. 
+- **`serial(fn, fnArgs)`** Used to execute async operations where the arguments could be received, generating a new result. 
 
   ###### error case:
   ```js
@@ -181,7 +181,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok([4, 2])
   ```
 
-- **`serialSync(fn, fnArgs)`** should be used to execute sync operations where the arguments could be received, generating a new result.
+- **`serialSync(fn, fnArgs)`** Used to execute sync operations where the arguments could be received, generating a new result.
 
   ###### error case:
   ```js
@@ -216,7 +216,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok([4, 2])
   ```
 
-- **`map(fn)`** should be used to execute async transformation operations where the arguments are the results from the last operation, generating a new result.
+- **`map(fn)`** Used to execute async transformation operations where the arguments are the results from the last operation, generating a new result.
 
   ###### error case:
   ```js
@@ -251,7 +251,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok('Annuls the try/catch need')
   ```
 
-- **`mapSync(fn)`** should be used to execute sync transformation operations where the arguments are the results from the last operation, generating a new result.
+- **`mapSync(fn)`** Used to execute sync transformation operations where the arguments are the results from the last operation, generating a new result.
 
   ###### error case:
   ```js
@@ -286,7 +286,7 @@ ResultTools can be installed through [npm][]:
   // ==> Result.Ok('Annuls the try/catch need')
   ```
 
-- **`get`** should be used to access the result value.
+- **`get`** Used to access the result value.
 
   ###### error case:
   ```js
@@ -314,7 +314,7 @@ ResultTools can be installed through [npm][]:
   // ==> 'Annuls the try/catch need'
   ```
 
-- **`orElse(arg)`** should be used to access the successful value or argument value in error cases.
+- **`orElse(arg)`** Used to access the successful value or argument value in error cases.
 
   ###### error case:
   ```js
@@ -342,7 +342,7 @@ ResultTools can be installed through [npm][]:
   // ==> 'Annuls the try/catch need'
   ```
 
-- **`isOk`** should be used to test the result value. Returns **True** if the result value is **Ok**.
+- **`isOk`** Used to test the result value. Returns **True** if the result value is **Ok**.
 
   ###### error case:
   ```js
@@ -370,7 +370,7 @@ ResultTools can be installed through [npm][]:
   // ==> true
   ```
 
-- **`isError`** should be used to test the result value. Returns **True** if the result value is **Error**.
+- **`isError`** Used to test the result value. Returns **True** if the result value is **Error**.
 
 ###### error case:
   ```js
