@@ -22,7 +22,9 @@
     "email": "rafaelfc.ads@gmail.com"
   },
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "babel-preset-stage-2": "^6.24.1"
+  },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.3",
