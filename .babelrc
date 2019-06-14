@@ -1,8 +1,7 @@
 {
-  "presets": [ "@babel/preset-es2015", "@babel/preset-stage-3" ],
+  "presets": [ "es2015", "stage-3" ],
   "plugins": [
-    "@babel/plugin-transform-runtime",
-    "@babel/transform-arrow-functions",
+    "transform-runtime",
     "syntax-async-functions",
     "transform-async-to-generator"
   ]
