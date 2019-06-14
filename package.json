@@ -10,7 +10,7 @@
     "build": "babel src -d dist",
     "postinstall": "npm run build"
   },
-  "author": "",
+  "author": "Rafael Ferreira Reis",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
@@ -24,7 +24,7 @@
     "babel-register": "6.26.0",
     "babel-runtime": "6.26.0",
     "chai": "4.1.2",
-    "coveralls": "^3.0.2",
+    "coveralls": "3.0.2",
     "eslint": "5.5.0",
     "lodash": "4.17.10",
     "mocha": "5.2.0",
