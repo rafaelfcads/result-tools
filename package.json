@@ -10,7 +10,17 @@
     "build": "babel src -d dist",
     "postinstall": "npm run build"
   },
-  "author": "",
+  "keywords": [
+    "result",
+    "functional",
+    "fluent",
+    "chain",
+    "seria"
+  ],
+  "author": {
+    "name": "Rafael Ferreira Reis",
+    "email": "rafaelfc.ads@gmail.com"
+  },
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
