@@ -1,12 +1,12 @@
 'use strict'
 
-import add from './add'
-import chain from './chain'
-import serial from './serial'
-import map from './map'
-import run from './run'
+const add = require('./add')
+const chain = require('./chain')
+const serial = require('./serial')
+const map = require('./map')
+const run = require('./run')
 
-export default (fns = []) => {
+module.exports = (fns = []) => {
 
   const methods = {
     serialSync: (fn, ...opts) => add(methods)(fns)(serial, fn, opts),

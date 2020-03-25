@@ -1,7 +1,7 @@
 'use strict'
 
-import _try from '../../src/sync/try'
-import { Ok, Error } from '../../src/type'
+const _try = require('../../src/sync/try')
+const { Ok, Error } = require('../../src/type')
 
 describe('sync.try', function() {
 

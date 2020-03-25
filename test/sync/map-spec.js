@@ -1,7 +1,7 @@
 'use strict'
 
-import map from '../../src/sync/map'
-import { Error } from '../../src/type'
+const map = require('../../src/sync/map')
+const { Error } = require('../../src/type')
 
 describe('sync.map', function() {
 

@@ -1,7 +1,7 @@
 'use strict'
 
-import chain from '../../src/sync/chain'
-import { Error } from '../../src/type'
+const chain = require('../../src/sync/chain')
+const { Error } = require('../../src/type')
 
 describe('sync.chain', function() {
 

@@ -1,17 +1,17 @@
 'use strict'
 
-import Type, { Ok, Error } from '../type'
+const Type = require('../type')
 
-export default function _try(fn) {
+module.exports = function _try(fn) {
 
   try {
 
     const result = fn()
     return Type.isOk(result) || Type.isError(result)
       ? result
-      : Ok(result)
+      : Type.Ok(result)
 
   } catch (err) {
-    return Error(err)
+    return Type.Error(err)
   }
 }

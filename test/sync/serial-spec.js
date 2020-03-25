@@ -1,7 +1,7 @@
 'use strict'
 
-import serial from '../../src/sync/serial'
-import { Error } from '../../src/type'
+const serial = require('../../src/sync/serial')
+const { Error } = require('../../src/type')
 
 describe('sync.serial', function() {
 

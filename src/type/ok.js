@@ -6,7 +6,7 @@ import flow from '../async'
 const serial = (fn, ...opts) => flow().serial(fn, ...opts)
 const serialSync = (fn, ...opts) => flowSync().serialSync(fn, ...opts)
 
-export default function Ok(value) {
+module.exports = function Ok(value) {
 
   return {
 

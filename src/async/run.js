@@ -1,9 +1,9 @@
 'use strict'
 
-import serial from './serial'
-import Type, { Ok } from '../type'
+const serial = require('./serial')
+const Type = require('../type')
 
-export default (fns) => async() => {
+module.exports = (fns) => async() => {
   let results = []
   let result
 
@@ -16,6 +16,6 @@ export default (fns) => async() => {
   }
 
   return results.length === 1
-    ? Ok(results[0])
-    : Ok(results)
+    ? Type.Ok(results[0])
+    : Type.Ok(results)
 }

@@ -1,7 +1,7 @@
 'use strict'
 
-import flow from '../../src/sync'
-import { Error } from '../../src/type'
+const flow = require('../../src/sync')
+const { Error } = require('../../src/type')
 
 describe('sync.flow', function() {
 

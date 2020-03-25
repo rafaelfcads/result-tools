@@ -1,10 +1,10 @@
 'use strict'
 
-import run from '../../src/sync/run'
-import serial from '../../src/sync/serial'
-import chain from '../../src/sync/chain'
-import map from '../../src/sync/map'
-import { Error } from '../../src/type'
+const run = require('../../src/sync/run')
+const serial = require('../../src/sync/serial')
+const chain = require('../../src/sync/chain')
+const map = require('../../src/sync/map')
+const { Error } = require('../../src/type')
 
 describe('sync.run', function() {
 

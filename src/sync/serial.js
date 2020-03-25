@@ -1,5 +1,5 @@
 'use strict'
 
-import _try from './try'
+const _try = require('./try')
 
-export default (fn, opts) => () => _try(() => fn(...opts))
+module.exports = (fn, opts) => () => _try(() => fn(...opts))

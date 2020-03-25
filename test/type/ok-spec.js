@@ -1,6 +1,6 @@
 'use strict'
 
-import Ok from '../../src/type/ok'
+const Ok = require('../../src/type/ok')
 
 describe('Type.Ok', function() {
 

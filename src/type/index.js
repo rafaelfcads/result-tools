@@ -1,7 +1,7 @@
 'use strict'
 
-import Ok from './ok'
-import Error from './error'
+const Ok = require('./ok')
+const Error = require('./error')
 
 const isOk = (val) => !!val
   && val.hasOwnProperty('isOk')
@@ -11,5 +11,9 @@ const isError = (val) => !!val
   && val.hasOwnProperty('isError')
   && val.isError()
 
-export default { Ok, Error, isOk, isError }
-export { Ok, Error, isOk, isError }
+module.exports.Ok = Ok
+module.exports.Error = Error
+module.exports.isError = isError
+module.exports.isOk = isOk
+
+

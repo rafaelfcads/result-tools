@@ -1,6 +1,6 @@
 'use strict'
 
-export default function Error(value) {
+module.exports = function Error(value) {
 
   const methods = {
 

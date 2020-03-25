@@ -1,6 +1,6 @@
 'use strict'
 
-import Error from '../../src/type/error'
+const Error = require('../../src/type/error')
 
 describe('Type.Error', function() {
 

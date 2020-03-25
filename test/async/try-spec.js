@@ -1,7 +1,7 @@
 'use strict'
 
 import _try from '../../src/async/try'
-import { Ok, Error } from '../../src/type'
+const { Ok, Error } = require('../../src/type')
 
 describe('async.try', function() {
 
